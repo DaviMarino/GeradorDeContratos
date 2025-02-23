@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Documentação - Geração de PDFs a partir de Word</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px;
+            line-height: 1.6;
+        }
+
+        h1 {
+            color: #2C3E50;
+        }
+
+        h2 {
+            color: #2980B9;
+        }
+
+        code {
+            background: #F4F4F4;
+            padding: 3px 5px;
+            border-radius: 3px;
+        }
+
+        pre {
+            background: #F4F4F4;
+            padding: 10px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+
+        .box {
+            border-left: 5px solid #2980B9;
+            padding: 10px;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>📄 Documentação - Geração de PDFs a partir de um Modelo Word</h1>
+
+    <h2>1. Introdução</h2>
+    <p>Este sistema permite gerar múltiplos documentos <b>Word e PDF automaticamente</b> a partir de um modelo Word
+        (<code>.docx</code>), substituindo variáveis dentro do documento e convertendo-o para PDF.</p>
+
+    <h2>2. Requisitos</h2>
+    <ul>
+        <li>O sistema já vem com tudo embutido em um executável.</li>
+        <li>Microsoft Word instalado (necessário para conversão para PDF).</li>
+        <li>Microsoft Excel instalado (necessário para as variáveis).</li>
+        <li>Os arquivos Word e Excel precisam estar fechados para o programa poder trabalhar.</li>
+    </ul>
+
+    <h2>3. Como Usar</h2>
+    <h3>Passo 1: Criar um Modelo Word</h3>
+    <p>Crie um arquivo Word (<code>.docx</code>) para servir de modelo, depois substitua as palavras por
+        variáveis nos locais que deseja substituir dinamicamente. Use o formato
+        <code>{var01}, {var02}, {var03}</code>, etc.
+    </p>
+    <p><strong>Exemplo:</strong></p>
+    <img src="static\anexo02.png" alt="Exemplo de arquivo Word" width="800px">
+    <p>Neste exemplo estamos usando 3 variáveis que serão substituidas pelo nome do
+        contratado, data de nascimento e cidade.</p>
+
+    <h3>Passo 2: Criar um Arquivo Excel</h3>
+    <p>O Excel deve conter uma planilha onde cada coluna representa uma variável, e cada linha representa um conjunto de
+        valores.</p>
+    <p><strong>Exemplo:</strong></p>
+    <p><b>⚠️ IMPORTANTE!</b> Os campos do Excel devem ser no formato texto idêntico ao exemplo.</p>
+    <img src="static\anexo01.png" alt="Exemplo de arquivo Excel" width="800px">
+
+    <h3>Passo 3: Executar o Programa</h3>
+    <p>Abra o arquivo executável e forneça os caminhos necessários:</p>
+    <ul>
+        <li>Será aberto um terminal CMD normalmente tela preta ou azul escuro.</li>
+        <li><strong>Caminho do arquivo Excel</strong> contendo os dados (<code>.xlsx</code>).
+            <ul>
+                <li>Aqui você passa o caminho completo do seu arquivo Excel, preste atenção para não escrever espaços,
+                    aspas, apóstrofos e caracteres extra.
+                    <img src="static\anexo03.png" alt="Exemplo de execução 1" width="800px">
+                </li>
+            </ul>
+        </li>
+        <li><strong>Caminho do modelo Word.</strong>
+            <ul>
+                <li>Aqui você passa o caminho completo do seu arquivo Word, preste atenção para não escrever espaços,
+                    aspas, apóstrofos e caracteres extra.</li>
+                <img src="static\anexo04.png" alt="Exemplo de execução 2" width="800px">
+            </ul>
+        </li>
+        <li><strong>Prefixo para nome dos arquivos gerados.</strong>
+            <ul>
+                <li>Aqui você passa o prefixo do nome do arquivo gerado, exemplo: Contrato</li>
+                <li>Supondo que você esteja criando documentos para 20 pessoas,
+                    será criado assim: <code>Contrato_Nome da Pessoa.docx</code></li>
+                <img src="static\anexo05.png" alt="Exemplo de execução 3" width="800px">
+            </ul>
+        </li>
+        <li><strong>Nome da variável para nomeação dos arquivos.</strong>
+            <ul>
+                <li>Aqui você mode customizar o nome do arquivo criado, por padrão será usado var01,
+                    isso significa que no seu Excel a coluna var01 vai ser o nome do arquivo Word criado.</li>
+                <li>Se no seu Excel a coluna var01 for o nome da pessoa, será criado um documento Word como
+                    <code>Contrato_Nome da Pessoa.docx</code> ou se a coluna var01 for o CPF da pessoa, será
+                    criado um documento Word como <code>Contrato_123.456.789-01.docx</code>.
+                </li>
+                <li>Por isso é importante se atentar para evitar erros, não use caracteres especiais para o nome do
+                    arquivo Word.</li>
+                <img src="static\anexo06.png" alt="Exemplo de execução 4" width="800px">
+            </ul>
+        </li>
+        <li><strong>O resultado deve ser algo parecido com isto:</strong>
+            <ul>
+                <li>O executável vai fechar sozinho.</li>
+                <li>Foi ser criado uma pasta junto com o executável.</li>
+                <li>O nome da pasta deve ser <code>{Prefixo}_criado</code>.</li>
+                <li>As variáveis foram substituidas dinamicamente respeitando a formatação do seu modelo original.</li>
+                <img src="static\anexo07.png" alt="Exemplo de execução 5" width="800px">
+                <img src="static\anexo08.png" alt="Exemplo de execução 6" width="800px">
+            </ul>
+        </li>
+    </ul>
+    
+    <h2>4. Logs e Depuração</h2>
+    <p>O sistema gera um log detalhado chamado <code>processo.log</code>. Se houver erros, consulte esse arquivo para
+        entender o problema.</p>
+    <img src="static\anexo09.png" alt="Exemplo de log" width="800px">
+
+    <h3>Erro Comum: Microsoft Word não encontrado</h3>
+    <div class="box">
+        <p><strong>Possível solução:</strong> Certifique-se de que o Microsoft Word está instalado e acessível pelo
+            sistema.</p>
+    </div>
+
+    <h3>Erro Comum: Arquivo de saída não gerado</h3>
+    <div class="box">
+        <p><strong>Possível solução:</strong> Verifique se os nomes das variáveis no Excel correspondem exatamente aos
+            do modelo Word.</p>
+    </div>
+
+    <h2>5. Resultado Esperado</h2>
+    <p>Após a execução, os arquivos serão gerados dentro de uma pasta nomeada conforme o prefixo fornecido.</p>
+</body>
+
+</html>
